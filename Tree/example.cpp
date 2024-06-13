@@ -19,9 +19,7 @@ void input(vector<int>&v, int n) {for(int i=0; i<n; i++){int x; cin>>x; v.push_b
 
 int main(){
     GET_FASTER;
-   for(int i=0;i<=10;i++){
-      cout<< i * i<<endl;
-   }
+ 
     
 
 
