@@ -17,9 +17,7 @@ public:
 
 };
 
-//Main file
 vector<vector<int>> printAdjacency(int n, int m, vector<vector<int>> &edges) {
-    
      graph g(n);
      for(int i=0;i<edges.size();i++){
          g.addEdge(edges[i][0],edges[i][1]);

@@ -26,15 +26,35 @@ public:
     graph(bool direction){
         this->direction = direction;
     }
-    void addEdge(int source, int dest){
-       adj_list[source].push_back(dest);
-        if(!direction){
-           adj_list[dest].push_back(source);
-        }
-    }
 
-    void print_graph(){
-     for(auto it = adj_list.begin();it!=adj_list.end();it++){
+    void addEdge(int source, int dest){
+     adj_list[source].push_back(dest);
+     if(!direction){
+         adj_list[dest].push_back(source);
+     }
+ }
+
+ void DFS_Implementation(int source, vector<int> &dfs, map<int,bool> &visited){
+    visited[source] = true;
+    dfs.push_back(source);
+
+    for(int i=0;i<adj_list[source].size();i++){
+        if(!visited[adj_list[source][i]])
+            DFS_Implementation(adj_list[source][i],dfs,visited);
+    }
+}
+
+vector<int> DFS(int source){
+    vector<int> dfs;
+    map<int,bool> visited;
+
+    DFS_Implementation(source,dfs,visited);
+
+    return dfs;
+}
+
+void print_graph(){
+   for(auto it = adj_list.begin();it!=adj_list.end();it++){
       cout<< it->first<< " -> ";
       for(auto vec : it->second){
           cout<<vec<<"  ";
@@ -50,16 +70,21 @@ int main(){
     GET_FASTER;
     
     graph g(true);
-    g.print_graph();
     
-    g.addEdge(1,3);
-    g.addEdge(1,4);
-    g.addEdge(4,2);
-    g.addEdge(4,1);
-    g.addEdge(2,3);
-    g.addEdge(3,4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
 
     g.print_graph();
+
+
+    vector<int> dfs = g.DFS(2);
+    for(auto s : dfs)
+        cout<< s<< " ";
+    cout<<endl;
 
 
 
