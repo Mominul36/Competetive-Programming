@@ -48,7 +48,7 @@ void bfs(int source){
   queue<int> q;
   map<int,bool> visited;
   q.push(source);
-  visited[0] = true;
+  visited[source] = true;
   while(!q.empty()){
     int current = q.front();
     q.pop();
